@@ -5,3 +5,14 @@ export type BlogType = {
     url: string;
     likes?: Number;
 };
+
+export type LoginInfo = {
+    username: string;
+    password: string;
+};
+
+export type AuthorizedUser = {
+    username: string;
+    name: string;
+    token: string;
+};
