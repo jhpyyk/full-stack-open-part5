@@ -1,10 +1,10 @@
 import axios from "axios";
 import { BlogType } from "../types";
-const baseUrl = "http://localhost:3003/api/blogs";
+const baseUrl = "/api/blogs";
 
-const getAll = (): Promise<BlogType[]> => {
-    const request = axios.get(baseUrl);
-    return request.then((response) => response.data);
+const getAll = async (): Promise<BlogType[]> => {
+    const response = await axios.get(baseUrl);
+    return response.data;
 };
 
 export default { getAll };
