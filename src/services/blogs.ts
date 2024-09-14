@@ -7,4 +7,6 @@ const getAll = async (): Promise<BlogType[]> => {
     return response.data;
 };
 
-export default { getAll };
+const create = async () => {};
+
+export default { getAll, create };

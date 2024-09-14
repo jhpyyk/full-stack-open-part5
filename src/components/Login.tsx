@@ -1,6 +1,7 @@
 import { SetStateAction, useState } from "react";
 import loginService from "../services/login";
 import { AuthorizedUser } from "../types";
+import { setUserLS } from "../utils/localstorage";
 
 interface LoginProps {
     setUser: React.Dispatch<SetStateAction<AuthorizedUser | undefined>>;
@@ -15,6 +16,7 @@ const Login = (props: LoginProps) => {
         try {
             const user = await loginService.login({ username, password });
             props.setUser(user);
+            setUserLS(user);
         } catch (error) {
             console.error("Login failed:", error);
         }
@@ -37,7 +39,9 @@ const Login = (props: LoginProps) => {
                     name="Password"
                     onChange={({ target }) => setPassword(target.value)}
                 />
-                <button type="submit">login</button>
+                <div style={{ marginTop: "15px" }}>
+                    <button type="submit">login</button>
+                </div>
             </form>
         </div>
     );
