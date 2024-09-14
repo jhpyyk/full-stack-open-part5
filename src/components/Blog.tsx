@@ -1,13 +1,13 @@
-import { BlogType } from "../types"
+import { BlogType } from "../types";
 
 interface BlogProps {
-    blog: BlogType
+    blog: BlogType;
 }
 
 const Blog = ({ blog }: BlogProps) => (
-  <div>
-    {blog.title} {blog.author}
-  </div>  
-)
+    <div>
+        <i>{blog.title}</i> by <b>{blog.author}</b>
+    </div>
+);
 
-export default Blog
+export default Blog;

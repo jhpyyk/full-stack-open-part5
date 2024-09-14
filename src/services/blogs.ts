@@ -1,5 +1,6 @@
 import axios from "axios";
-import { BlogType } from "../types";
+import { BlogType, NewBlog } from "../types";
+import { getAuthorizationConfig } from "../utils/misc";
 const baseUrl = "/api/blogs";
 
 const getAll = async (): Promise<BlogType[]> => {
@@ -7,6 +8,10 @@ const getAll = async (): Promise<BlogType[]> => {
     return response.data;
 };
 
-const create = async () => {};
+const create = async (newBlog: NewBlog, token: string) => {
+    const config = getAuthorizationConfig(token);
+    const response = await axios.post(baseUrl, newBlog, config);
+    return response.data;
+};
 
 export default { getAll, create };

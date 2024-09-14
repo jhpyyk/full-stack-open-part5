@@ -6,6 +6,8 @@ export type BlogType = {
     likes?: Number;
 };
 
+export type NewBlog = Omit<BlogType, "id" | "likes">;
+
 export type LoginInfo = {
     username: string;
     password: string;
