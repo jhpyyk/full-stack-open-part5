@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    font-size: 4vh;
+    width: 40vw;
+    height: 10vh;
+    border-style: solid;
+    border-radius: 5%;
+    border-width: 5px;
+    align-items: center;
+    padding-left: 3vh;
+}

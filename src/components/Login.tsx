@@ -5,6 +5,7 @@ import { setUserLS } from "../utils/localstorage";
 
 interface LoginProps {
     setUser: React.Dispatch<SetStateAction<AuthorizedUser | undefined>>;
+    displayNotification: (text: string, isSuccesful: boolean) => void;
 }
 
 const Login = (props: LoginProps) => {
@@ -17,8 +18,14 @@ const Login = (props: LoginProps) => {
             const user = await loginService.login({ username, password });
             props.setUser(user);
             setUserLS(user);
+            props.displayNotification(
+                `Succesfully logged in as ${username}`,
+                true
+            );
         } catch (error) {
-            console.error("Login failed:", error);
+            const errorText = `Login failed: ${error as string}`;
+            console.error(errorText);
+            props.displayNotification(errorText, false);
         }
     };
     return (

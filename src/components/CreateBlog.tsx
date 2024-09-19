@@ -5,6 +5,7 @@ import { NewBlog } from "../types";
 interface CreateBlogProps {
     token: string;
     fetchBlogs: () => void;
+    displayNotification: (text: string, isSuccesful: boolean) => void;
 }
 
 const CreateBlog = (props: CreateBlogProps) => {
@@ -21,6 +22,10 @@ const CreateBlog = (props: CreateBlogProps) => {
         };
 
         const createdBlog = await blogService.create(newBlog, props.token);
+        props.displayNotification(
+            `Succesully added blog ${createdBlog.title}`,
+            true
+        );
         console.log(createdBlog);
         props.fetchBlogs();
     };

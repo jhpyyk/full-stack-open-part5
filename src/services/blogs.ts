@@ -8,7 +8,7 @@ const getAll = async (): Promise<BlogType[]> => {
     return response.data;
 };
 
-const create = async (newBlog: NewBlog, token: string) => {
+const create = async (newBlog: NewBlog, token: string): Promise<BlogType> => {
     const config = getAuthorizationConfig(token);
     const response = await axios.post(baseUrl, newBlog, config);
     return response.data;

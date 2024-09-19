@@ -4,10 +4,12 @@ import { removeUserLS } from "../utils/localstorage";
 
 interface LogoutButtonProps {
     setUser: React.Dispatch<SetStateAction<AuthorizedUser | undefined>>;
+    displayNotification: (text: string, isSuccesful: boolean) => void;
 }
 
-const LogoutButton = ({ setUser }: LogoutButtonProps) => {
+const LogoutButton = ({ setUser, displayNotification }: LogoutButtonProps) => {
     const handleLogout = () => {
+        displayNotification("Logged out", true);
         setUser(undefined);
         removeUserLS();
     };
