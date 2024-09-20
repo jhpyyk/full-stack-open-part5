@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, ReactNode } from "react";
 import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import { AuthorizedUser, BlogType } from "./types";
@@ -10,6 +10,7 @@ import CreateBlog from "./components/CreateBlog";
 import NotificationBox, {
     NotificationColors,
 } from "./components/NotificationBox/NotificationBox";
+import Togglable, { ToggleVisibleHandle } from "./components/Togglable";
 
 const App = () => {
     const [blogs, setBlogs] = useState<BlogType[]>([]);
@@ -17,8 +18,8 @@ const App = () => {
     const [notificationText, setNotificationText] = useState<string>("");
     const [notificationColor, setNotificationColor] =
         useState<NotificationColors>("lightgreen");
-
     const [timeoutID, setTimeoutID] = useState<number>(0);
+    const togglableRef = useRef<ToggleVisibleHandle>(null);
 
     const displayNotification = (text: string, isSuccesful: boolean) => {
         setNotificationText(text);
@@ -84,13 +85,14 @@ const App = () => {
                 />
             )}
             {user && (
-                <div>
+                <Togglable buttonText="new blog" ref={togglableRef}>
                     <CreateBlog
                         token={user.token}
                         fetchBlogs={fetchBlogs}
                         displayNotification={displayNotification}
+                        togglableRef={togglableRef}
                     />
-                </div>
+                </Togglable>
             )}
             <h2>Blogs</h2>
             {blogs.map((blog) => (

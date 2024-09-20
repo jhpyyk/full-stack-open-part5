@@ -1,11 +1,13 @@
 import { useState } from "react";
 import blogService from "../services//blogs";
 import { NewBlog } from "../types";
+import { ToggleVisibleHandle } from "./Togglable";
 
 interface CreateBlogProps {
     token: string;
     fetchBlogs: () => void;
     displayNotification: (text: string, isSuccesful: boolean) => void;
+    togglableRef: React.RefObject<ToggleVisibleHandle>;
 }
 
 const CreateBlog = (props: CreateBlogProps) => {
@@ -20,7 +22,7 @@ const CreateBlog = (props: CreateBlogProps) => {
             author: author,
             url: URL,
         };
-
+        props.togglableRef.current?.toggleVisible();
         const createdBlog = await blogService.create(newBlog, props.token);
         props.displayNotification(
             `Succesully added blog ${createdBlog.title}`,
