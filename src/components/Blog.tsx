@@ -6,6 +6,7 @@ interface BlogProps {
     handleLike: (blog: BlogType) => void;
     handleRemoveBlog: (blog: BlogType) => void;
     showRemove: boolean;
+    showLikeButton: boolean;
 }
 
 const Blog = ({
@@ -13,6 +14,7 @@ const Blog = ({
     handleLike,
     handleRemoveBlog,
     showRemove,
+    showLikeButton,
 }: BlogProps) => {
     const [isVisible, setIsVisible] = useState(false);
     return (
@@ -45,13 +47,16 @@ const Blog = ({
                     <li>{blog.url}</li>
                     <li>
                         likes: {blog.likes?.toString()}{" "}
-                        <button
-                            style={{ marginLeft: 20 }}
-                            onClick={() => handleLike(blog)}
-                        >
-                            like
-                        </button>
+                        {showLikeButton && (
+                            <button
+                                style={{ marginLeft: 20 }}
+                                onClick={() => handleLike(blog)}
+                            >
+                                like
+                            </button>
+                        )}
                     </li>
+
                     <li>From user: {blog.user.name}</li>
                     {showRemove && (
                         <li>

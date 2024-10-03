@@ -122,6 +122,7 @@ const App = () => {
                     handleLike={handleLike}
                     handleRemoveBlog={handleRemoveBlog}
                     showRemove={blog.user.id === user?.id}
+                    showLikeButton={user !== undefined}
                 />
             ))}
         </div>
