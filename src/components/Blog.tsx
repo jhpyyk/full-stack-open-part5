@@ -4,9 +4,16 @@ import { BlogType } from "../types";
 interface BlogProps {
     blog: BlogType;
     handleLike: (blog: BlogType) => void;
+    handleRemoveBlog: (blog: BlogType) => void;
+    showRemove: boolean;
 }
 
-const Blog = ({ blog, handleLike }: BlogProps) => {
+const Blog = ({
+    blog,
+    handleLike,
+    handleRemoveBlog,
+    showRemove,
+}: BlogProps) => {
     const [isVisible, setIsVisible] = useState(false);
     return (
         <ul
@@ -46,6 +53,13 @@ const Blog = ({ blog, handleLike }: BlogProps) => {
                         </button>
                     </li>
                     <li>From user: {blog.user.name}</li>
+                    {showRemove && (
+                        <li>
+                            <button onClick={() => handleRemoveBlog(blog)}>
+                                remove
+                            </button>
+                        </li>
+                    )}
                 </div>
             )}
         </ul>

@@ -17,6 +17,7 @@ export type LoginInfo = {
 export type AuthorizedUser = {
     username: string;
     name: string;
+    id: string;
     token: string;
 };
 

@@ -54,6 +54,14 @@ const App = () => {
         await fetchBlogs();
     };
 
+    const handleRemoveBlog = async (blog: BlogType) => {
+        if (window.confirm(`Removing blog ${blog.title}`)) {
+            await blogService.remove(blog.id, user!.token);
+            console.log("removed blog", blog.title);
+            await fetchBlogs();
+        }
+    };
+
     useEffect(() => {
         const existingUser = getUserLS();
         if (existingUser) {
@@ -108,7 +116,13 @@ const App = () => {
             )}
             <h2>Blogs</h2>
             {sortBlogs(blogs).map((blog) => (
-                <Blog key={blog.id} blog={blog} handleLike={handleLike} />
+                <Blog
+                    key={blog.id}
+                    blog={blog}
+                    handleLike={handleLike}
+                    handleRemoveBlog={handleRemoveBlog}
+                    showRemove={blog.user.id === user?.id}
+                />
             ))}
         </div>
     );

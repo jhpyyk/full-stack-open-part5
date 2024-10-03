@@ -24,4 +24,10 @@ const patch = async (
     return response.data;
 };
 
-export default { getAll, create, patch };
+const remove = async (id: string, token: string) => {
+    const config = getAuthorizationConfig(token);
+    const removedBlog = await axios.delete(`${baseUrl}/${id}`, config);
+    return removedBlog;
+};
+
+export default { getAll, create, patch, remove };
