@@ -4,6 +4,7 @@ export type BlogType = {
     author: string;
     url: string;
     likes?: number;
+    user: UserType;
 };
 
 export type NewBlog = Omit<BlogType, "id" | "likes">;
@@ -17,4 +18,10 @@ export type AuthorizedUser = {
     username: string;
     name: string;
     token: string;
+};
+
+export type UserType = {
+    username: string;
+    name: string;
+    id: string;
 };

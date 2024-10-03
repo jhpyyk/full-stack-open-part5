@@ -45,6 +45,7 @@ const Blog = ({ blog, handleLike }: BlogProps) => {
                             like
                         </button>
                     </li>
+                    <li>From user: {blog.user.name}</li>
                 </div>
             )}
         </ul>
