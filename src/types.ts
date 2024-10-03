@@ -7,7 +7,7 @@ export type BlogType = {
     user: UserType;
 };
 
-export type NewBlog = Omit<BlogType, "id" | "likes">;
+export type NewBlog = Omit<BlogType, "id" | "likes" | "user">;
 
 export type LoginInfo = {
     username: string;

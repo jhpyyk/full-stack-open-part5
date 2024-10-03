@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BlogType } from "../types";
+import PropTypes from "prop-types";
 
 interface BlogProps {
     blog: BlogType;
@@ -69,6 +70,25 @@ const Blog = ({
             )}
         </ul>
     );
+};
+
+Blog.propTypes = {
+    blog: PropTypes.exact({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+        likes: PropTypes.number,
+        user: PropTypes.exact({
+            username: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+        }),
+    }),
+    handleLike: PropTypes.func.isRequired,
+    handleRemoveBlog: PropTypes.func.isRequired,
+    showRemove: PropTypes.bool.isRequired,
+    showLikeButton: PropTypes.bool.isRequired,
 };
 
 export default Blog;
