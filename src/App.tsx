@@ -42,6 +42,17 @@ const App = () => {
         setBlogs(blogs);
     };
 
+    const handleLike = async (blog: BlogType) => {
+        console.log(blog);
+        if (blog.likes !== undefined) {
+            let newLikes = blog.likes + 1;
+            await blogService.patch(blog.id, { likes: newLikes }, user!.token);
+        } else {
+            console.log("blog has no like field");
+        }
+        await fetchBlogs();
+    };
+
     useEffect(() => {
         const existingUser = getUserLS();
         if (existingUser) {
@@ -96,7 +107,7 @@ const App = () => {
             )}
             <h2>Blogs</h2>
             {blogs.map((blog) => (
-                <Blog key={blog.id} blog={blog} />
+                <Blog key={blog.id} blog={blog} handleLike={handleLike} />
             ))}
         </div>
     );

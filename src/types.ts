@@ -3,7 +3,7 @@ export type BlogType = {
     title: string;
     author: string;
     url: string;
-    likes?: Number;
+    likes?: number;
 };
 
 export type NewBlog = Omit<BlogType, "id" | "likes">;

@@ -3,9 +3,10 @@ import { BlogType } from "../types";
 
 interface BlogProps {
     blog: BlogType;
+    handleLike: (blog: BlogType) => void;
 }
 
-const Blog = ({ blog }: BlogProps) => {
+const Blog = ({ blog, handleLike }: BlogProps) => {
     const [isVisible, setIsVisible] = useState(false);
     return (
         <ul
@@ -35,7 +36,15 @@ const Blog = ({ blog }: BlogProps) => {
                         <b>{blog.author}</b>
                     </li>
                     <li>{blog.url}</li>
-                    <li>{blog.likes?.toString()}</li>
+                    <li>
+                        likes: {blog.likes?.toString()}{" "}
+                        <button
+                            style={{ marginLeft: 20 }}
+                            onClick={() => handleLike(blog)}
+                        >
+                            like
+                        </button>
+                    </li>
                 </div>
             )}
         </ul>

@@ -14,4 +14,14 @@ const create = async (newBlog: NewBlog, token: string): Promise<BlogType> => {
     return response.data;
 };
 
-export default { getAll, create };
+const patch = async (
+    id: string,
+    blogFields: Partial<BlogType>,
+    token: string
+) => {
+    const config = getAuthorizationConfig(token);
+    const response = await axios.patch(`${baseUrl}/${id}`, blogFields, config);
+    return response.data;
+};
+
+export default { getAll, create, patch };
