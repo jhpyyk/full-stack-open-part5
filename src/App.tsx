@@ -11,6 +11,7 @@ import NotificationBox, {
     NotificationColors,
 } from "./components/NotificationBox/NotificationBox";
 import Togglable, { ToggleVisibleHandle } from "./components/Togglable";
+import { sortBlogs } from "./utils/misc";
 
 const App = () => {
     const [blogs, setBlogs] = useState<BlogType[]>([]);
@@ -106,7 +107,7 @@ const App = () => {
                 </Togglable>
             )}
             <h2>Blogs</h2>
-            {blogs.map((blog) => (
+            {sortBlogs(blogs).map((blog) => (
                 <Blog key={blog.id} blog={blog} handleLike={handleLike} />
             ))}
         </div>
