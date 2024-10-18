@@ -1,7 +1,7 @@
 import { useState } from "react";
-import blogService from "../services//blogs";
-import { NewBlog } from "../types";
-import { ToggleVisibleHandle } from "./Togglable";
+import blogService from "../../services/blogs";
+import { NewBlog } from "../../types";
+import { ToggleVisibleHandle } from "../Togglable/Togglable";
 
 interface CreateBlogProps {
     token: string;

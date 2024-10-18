@@ -1,6 +1,6 @@
 import { SetStateAction } from "react";
-import { AuthorizedUser } from "../types";
-import { removeUserLS } from "../utils/localstorage";
+import { AuthorizedUser } from "../../types";
+import { removeUserLS } from "../../utils/localstorage";
 
 interface LogoutButtonProps {
     setUser: React.Dispatch<SetStateAction<AuthorizedUser | undefined>>;

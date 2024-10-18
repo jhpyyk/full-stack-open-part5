@@ -1,16 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import Blog from "./components/Blog";
+import Blog from "./components/Blog/Blog";
 import blogService from "./services/blogs";
 import { AuthorizedUser, BlogType } from "./types";
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
 import { getUserLS } from "./utils/localstorage";
-import UserDisplay from "./components/UserDisplay";
-import LogoutButton from "./components/LogoutButton";
-import CreateBlog from "./components/CreateBlog";
+import UserDisplay from "./components/UserDisplay/UserDisplay";
+import LogoutButton from "./components/LogoutButton/LogoutButton";
+import CreateBlog from "./components/CreateBlog/CreateBlog";
 import NotificationBox, {
     NotificationColors,
 } from "./components/NotificationBox/NotificationBox";
-import Togglable, { ToggleVisibleHandle } from "./components/Togglable";
+import Togglable, {
+    ToggleVisibleHandle,
+} from "./components/Togglable/Togglable";
 import { sortBlogs } from "./utils/misc";
 
 const App = () => {

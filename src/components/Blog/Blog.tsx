@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BlogType } from "../types";
+import { BlogType } from "../../types";
 import PropTypes from "prop-types";
 
 interface BlogProps {

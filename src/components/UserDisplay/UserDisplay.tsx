@@ -1,4 +1,4 @@
-import { AuthorizedUser } from "../types";
+import { AuthorizedUser } from "../../types";
 
 interface UserDisplayProps {
     user: AuthorizedUser;

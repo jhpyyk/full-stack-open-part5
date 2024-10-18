@@ -1,7 +1,7 @@
 import { SetStateAction, useState } from "react";
-import loginService from "../services/login";
-import { AuthorizedUser } from "../types";
-import { setUserLS } from "../utils/localstorage";
+import loginService from "../../services/login";
+import { AuthorizedUser } from "../../types";
+import { setUserLS } from "../../utils/localstorage";
 
 interface LoginProps {
     setUser: React.Dispatch<SetStateAction<AuthorizedUser | undefined>>;
