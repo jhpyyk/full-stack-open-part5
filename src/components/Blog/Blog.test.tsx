@@ -5,7 +5,8 @@ import Blog from "./Blog";
 import { BlogType, UserType } from "../../types";
 
 describe("Blog component", () => {
-    const mockHandler = vi.fn();
+    const mockHandleLike = vi.fn();
+    const mockHandleRemoveBlog = vi.fn();
     const interact = userEvent.setup();
 
     const user: UserType = {
@@ -25,12 +26,17 @@ describe("Blog component", () => {
     const blogComponent = (
         <Blog
             blog={blog}
-            handleLike={mockHandler}
-            handleRemoveBlog={mockHandler}
+            handleLike={mockHandleLike}
+            handleRemoveBlog={mockHandleRemoveBlog}
             showRemove={true}
             showLikeButton={true}
         />
     );
+
+    beforeEach(() => {
+        mockHandleLike.mockClear();
+        mockHandleRemoveBlog.mockClear();
+    });
 
     it("renders title and not url and likes", () => {
         render(blogComponent);
@@ -58,5 +64,21 @@ describe("Blog component", () => {
         expect(title).toBeVisible();
         expect(url).toBeVisible();
         expect(likes).toBeVisible();
+    });
+
+    it("like button event handler is called two times when clicked two times", async () => {
+        render(blogComponent);
+
+        const showButton = screen.getByText("show");
+        await interact.click(showButton);
+
+        const likeButton = screen.getByText("like");
+
+        expect(mockHandleLike.mock.calls).toHaveLength(0);
+
+        await interact.click(likeButton);
+        await interact.click(likeButton);
+
+        expect(mockHandleLike.mock.calls).toHaveLength(2);
     });
 });
