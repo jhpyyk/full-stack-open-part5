@@ -1,10 +1,8 @@
 import { useState } from "react";
-import blogService from "../../services/blogs";
-import { NewBlog } from "../../types";
 import { ToggleVisibleHandle } from "../Togglable/Togglable";
 
 interface CreateBlogProps {
-    token: string;
+    handleSubmit: (title: string, author: string, url: string) => void;
     fetchBlogs: () => void;
     displayNotification: (text: string, isSuccesful: boolean) => void;
     togglableRef: React.RefObject<ToggleVisibleHandle>;
@@ -15,27 +13,15 @@ const CreateBlog = (props: CreateBlogProps) => {
     const [author, setAuthor] = useState<string>("");
     const [URL, setURL] = useState<string>("");
 
-    const handleSubmit = async (event: React.SyntheticEvent) => {
-        event.preventDefault();
-        const newBlog: NewBlog = {
-            title: title,
-            author: author,
-            url: URL,
-        };
-        props.togglableRef.current?.toggleVisible();
-        const createdBlog = await blogService.create(newBlog, props.token);
-        props.displayNotification(
-            `Succesully added blog ${createdBlog.title}`,
-            true
-        );
-        console.log(createdBlog);
-        props.fetchBlogs();
-    };
-
     return (
         <div>
             <h2>New blog</h2>
-            <form onSubmit={handleSubmit}>
+            <form
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    props.handleSubmit(title, author, URL);
+                }}
+            >
                 <p>Title</p>
                 <input
                     type="text"

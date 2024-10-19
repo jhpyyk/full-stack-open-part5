@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Blog from "./components/Blog/Blog";
 import blogService from "./services/blogs";
-import { AuthorizedUser, BlogType } from "./types";
+import { AuthorizedUser, BlogType, NewBlog } from "./types";
 import Login from "./components/Login/Login";
 import { getUserLS } from "./utils/localstorage";
 import UserDisplay from "./components/UserDisplay/UserDisplay";
@@ -43,6 +43,19 @@ const App = () => {
         console.log("fetching blogs");
         const blogs = await blogService.getAll();
         setBlogs(blogs);
+    };
+
+    const handleSubmit = async (title: string, author: string, url: string) => {
+        const newBlog: NewBlog = {
+            title: title,
+            author: author,
+            url: url,
+        };
+        togglableRef.current?.toggleVisible();
+        const createdBlog = await blogService.create(newBlog, user!.token);
+        displayNotification(`Succesully added blog ${createdBlog.title}`, true);
+        console.log(createdBlog);
+        fetchBlogs();
     };
 
     const handleLike = async (blog: BlogType) => {
@@ -109,7 +122,7 @@ const App = () => {
             {user && (
                 <Togglable buttonText="new blog" ref={togglableRef}>
                     <CreateBlog
-                        token={user.token}
+                        handleSubmit={handleSubmit}
                         fetchBlogs={fetchBlogs}
                         displayNotification={displayNotification}
                         togglableRef={togglableRef}
